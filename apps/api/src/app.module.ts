@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -15,9 +16,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
       }),
     }),
+    TodoModule,
   ],
 })
 export class AppModule {}
